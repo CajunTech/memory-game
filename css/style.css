@@ -1,0 +1,22 @@
+body {
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+.board {
+    width: 800px;
+	display: grid;
+	grid-template-columns: repeat(4, auto);
+	/* justify-content: center; */
+    align-content: space-around;
+	margin: 10px auto;
+}
+.card{
+    width: 120px;
+	height: 120px;
+	border-color: black;
+	border-style: solid;
+	background-color: white;
+    margin: 20px auto;
+}
