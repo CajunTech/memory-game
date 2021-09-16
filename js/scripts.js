@@ -49,16 +49,17 @@ for (i = 0; i < gameSize; i++) {
 		.setAttribute('id', i);
 	document.getElementById(i).setAttribute('class', 'card');
 }
- 
 
 let cards = document.querySelectorAll('.card');
-resetBoard()
+resetBoard();
 
 for (i = 0; i < cards.length; i++) {
 	cards[i].addEventListener('click', function selectCard(event) {
 		if (this.style.backgroundColor === 'white') {
-            console.log(`Card ${this.id} clicked`);
-		}
+			// console.log(`Card ${this.id} clicked`);
+            flipCard(this)
+            
+        }
 		// event.preventDefault()
 		// console.log(`Card ${this.id} clicked`);
 	});
@@ -70,4 +71,7 @@ function resetBoard() {
 	}
 	firstChoice = '';
 	secondChoice = '';
+}
+function flipCard(c) {
+    c.style.backgroundColor = cardsForGame[c.id]
 }
