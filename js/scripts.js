@@ -10,5 +10,11 @@ for (i = 0; i < gameSize; i++) {
 	document.getElementById(i).setAttribute('class', 'card');
 }
 
-
+let cards = document.querySelectorAll('.card');
+for (i = 0; i < cards.length; i++) {
+    cards[i].addEventListener('click', function selectCard(event) {
+        // event.preventDefault()
+        console.log(`Card ${this.id} clicked`);
+    });
+}
 
