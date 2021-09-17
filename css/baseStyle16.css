@@ -22,52 +22,45 @@ body {
     width: 120px;
 	height: 120px;
 	background-color: white;
+    margin: 0px auto;
+}
+.button {
     margin: 10px auto;
+    border-radius: 10px;
+    width: 80px;
 }
 #resetButton {
-    margin: 40px auto;
+    margin: 20px auto;
     width: 120px;
-    height: 40px;
+    height: 30px;
     font-size: large;
 }
 
 .difficultySelect {
-    display: inline-flex;
-    align-items: left;
+    display:inline-flex;
+    justify-content: space-around;
+    flex-direction: row;
+    margin: 1px auto;
+}
+.difficultySelect > button {
+    width: 80px;
 }
 
 #clickCounter {
    background-color: grey;
-   width: 150px;
+   width: 140px;
+   text-align:center;
    border-radius: 10px; 
 }
 
-/* .counter { */
-    /* width:70px;
-        height:auto;
-        background:#CC0000;
-        color:#FFF;
-        padding:10px 20px; 
-        text-align:center;
-        top:0;
-        position:fixed;
-        top: 50px;
-        left: 0px;  */
-
-/* 
-    display: flex;
-    justify-content: start;
-    align-items: start;
-    float: left;
-    position: fixed;
-    width: 150px;
-    height: 20px;
+#timer{
     background-color: grey;
-    border-radius: 10px;
-    text-align: justify;
-    word-wrap: normal;
+    width: 120px;
+    text-align:center;
+    border-radius: 10px; 
 }
-{ 
-    margin: 0px auto;
-    align-content: left; */
-/* } */
+h2 {
+    font-size: 20px;
+    padding: 0px;
+    height: 0px;
+}

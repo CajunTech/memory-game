@@ -10,37 +10,66 @@ let secondChoice = {
 let winCon = 0;
 const board = document.getElementById('board');
 let cards;
-let dColumns = 'repeat(4, 150px)'
+let dColumns = 'repeat(4, 150px)';
 let dRows = 'repeat(4, 150px)';
 let cardWidth = '140px';
 let cardHeight = '140px';
-let cardColors16 = [
-	'red',
-	'red',
-	'green',
-	'green',
-	'purple',
-	'purple',
-	'yellow',
-	'yellow',
-	'blue',
-	'blue',
-	'orange',
-	'orange',
-	'brown',
-	'brown',
-	'pink',
-	'pink',
-];
+// let cardColors16 = [
+// 	'red',
+// 	'red',
+// 	'green',
+// 	'green',
+// 	'purple',
+// 	'purple',
+// 	'yellow',
+// 	'yellow',
+// 	'blue',
+// 	'blue',
+// 	'orange',
+// 	'orange',
+// 	'brown',
+// 	'brown',
+// 	'pink',
+// 	'pink',
+// ];
 //cardColorsForGame
 //for (i=0;i<gameSize;i++) {
 //push colors from master array into cardColorsforGame
 //}
 //let cardsForGame = shuffle(cardColorsforGame)
 
+const colorMaster = [
+	'pink',
+	'pink',
+	'red',
+	'red',
+	'orange',
+	'orange',
+	'yellow',
+	'yellow',
+	'green',
+	'green',
+	'blue',
+	'blue',
+	'purple',
+	'purple',
+	'chocolate',
+	'chocolate',
+];
 
+let cardColorsForGame = []
+function setCardColorsForGame () {
+    for (i=0;i<gameSize;i++) {
+        cardColorsForGame.push(colorMaster[i])
+    }
+    console.log(cardColorsForGame)
+    cardsForGame = shuffle(cardColorsForGame);
+    console.log(cardsForGame)
+}
+const clickCounter = document.querySelector('#clickCounter');
+let clickCount;
 let busy = false;
-let cardsForGame = shuffle(cardColors16);
+let cardsForGame = [ ]
 // console.log(cardsForGame);
 
 //https://bost.ocks.org/mike/shuffle/ - Fisher-Yates Shuffle
@@ -63,6 +92,7 @@ function shuffle(array) {
 buildBoard();
 function buildBoard() {
 	clearCurrentCards();
+    setCardColorsForGame()
 	for (i = 0; i < gameSize; i++) {
 		document
 			.querySelector('.board')
@@ -71,15 +101,17 @@ function buildBoard() {
 		document.getElementById(i).setAttribute('class', 'card');
 	}
 	cards = document.querySelectorAll('.card');
-    sizeSet = document.getElementsByClassName('.card')
+	sizeSet = document.getElementsByClassName('.card');
 	board.style.gridTemplateColumns = dColumns;
-    board.style.gridTemplateRows = dRows;
-    for (i=0; i<cards.length;i++) {
-        setSize(cards[i])
-    }
-    setCardListeners()
+	board.style.gridTemplateRows = dRows;
+	for (i = 0; i < cards.length; i++) {
+		setSize(cards[i]);
+	}
+	setCardListeners();
 	resetBoard();
-    console.log(cards)
+	clickCount = 0;
+	clickCounter.innerHTML = 'Click Counter: 0';
+	console.log(cards);
 }
 //https://css-tricks.com/snippets/javascript/remove-element/
 function clearCurrentCards() {
@@ -93,16 +125,17 @@ function clearCurrentCards() {
 resetBoard();
 
 function setCardListeners() {
-for (i = 0; i < cards.length; i++) {
-	cards[i].addEventListener('click', function selectCard(event) {
-		if (this.style.backgroundColor === 'white' && !busy) {
-			// console.log(`Card ${this.id} clicked`);
-			flipCard(this);
-			setCardCondition(this);
-			checkCards();
-		}
-	});
-}
+	for (i = 0; i < cards.length; i++) {
+		cards[i].addEventListener('click', function selectCard(event) {
+			if (this.style.backgroundColor === 'white' && !busy) {
+				// console.log(`Card ${this.id} clicked`);
+				flipCard(this);
+				trackClickCount();
+				setCardCondition(this);
+				checkCards();
+			}
+		});
+	}
 }
 
 const resetButton = document.querySelector('#resetButton');
@@ -161,7 +194,7 @@ function checkWin() {
 	console.log(`WinCon = ${winCon}`);
 	if (winCon === gameSize) {
 		setTimeout(() => {
-			alert('We have a winner');
+			alert(`You found all ${gameSize / 2} matches in ${clickCount} clicks!`);
 		}, 10);
 	} else {
 		winCon = 0;
@@ -180,10 +213,10 @@ function resetCards() {
 const buttonD1 = document.querySelector('#buttonD1');
 buttonD1.addEventListener('click', function d1(event) {
 	gameSize = 16;
-	dColumns = 'repeat(4, 150px)'
-    dRows = 'repeat(4, 150px)'
-    cardWidth = '140px'
-    cardHeight = '140px'
+	dColumns = 'repeat(4, 150px)';
+	dRows = 'repeat(4, 150px)';
+	cardWidth = '140px';
+	cardHeight = '140px';
 
 	buildBoard();
 });
@@ -192,9 +225,9 @@ const buttonD2 = document.querySelector('#buttonD2');
 buttonD2.addEventListener('click', function d2(event) {
 	gameSize = 20;
 	dColumns = 'repeat(5, 120px)';
-    dRows = 'repeat(4, 150px)'
-    cardWidth = '110px'
-    cardHeight = '110px'
+	dRows = 'repeat(4, 150px)';
+	cardWidth = '110px';
+	cardHeight = '110px';
 	buildBoard();
 });
 
@@ -202,9 +235,9 @@ const buttonD3 = document.querySelector('#buttonD3');
 buttonD3.addEventListener('click', function d3() {
 	gameSize = 24;
 	dColumns = 'repeat(6, 100px)';
-    dRows = 'repeat(4, 150px)'
-    cardWidth = '90px'
-    cardHeight = '90px'
+	dRows = 'repeat(4, 150px)';
+	cardWidth = '90px';
+	cardHeight = '90px';
 	buildBoard();
 });
 
@@ -212,13 +245,17 @@ const buttonD4 = document.querySelector('#buttonD4');
 buttonD4.addEventListener('click', function d4() {
 	gameSize = 30;
 	dColumns = 'repeat(6, 100px)';
-    dRows = 'repeat(5, 120px)'
-    cardWidth = '90px'
-    cardHeight = '90px'
+	dRows = 'repeat(5, 120px)';
+	cardWidth = '90px';
+	cardHeight = '90px';
 	buildBoard();
 });
 
 function setSize(c) {
-    c.style.width = cardWidth;
+	c.style.width = cardWidth;
 	c.style.height = cardHeight;
+}
+function trackClickCount() {
+	clickCount++;
+	clickCounter.innerText = `Click Counter: ${clickCount}`;
 }
