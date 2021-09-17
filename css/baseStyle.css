@@ -44,6 +44,7 @@ body {
 }
 .difficultySelect > button {
     width: 80px;
+    /* max-height: 30px; */
 }
 
 #clickCounter {
@@ -56,6 +57,7 @@ body {
 #timer{
     background-color: grey;
     width: 120px;
+    /* height: 40px; */
     text-align:center;
     border-radius: 10px; 
 }

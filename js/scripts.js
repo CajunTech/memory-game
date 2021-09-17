@@ -14,7 +14,7 @@ let dColumns = 'repeat(4, 150px)';
 let dRows = 'repeat(4, 150px)';
 let cardWidth = '140px';
 let cardHeight = '140px';
-
+let trackedSeconds = '';
 const colorMaster = [
 	'pink',
 	'pink',
@@ -60,6 +60,9 @@ const clickCounter = document.querySelector('#clickCounter');
 let clickCount;
 let busy = false;
 let cardsForGame = [];
+let pageTimer = setInterval(function () {
+	trackTime();
+}, 1000);
 
 //https://bost.ocks.org/mike/shuffle/ - Fisher-Yates Shuffle
 function shuffle(array) {
@@ -68,7 +71,7 @@ function shuffle(array) {
 	// While there remain elements to shuffle…
 	while (m) {
 		// Pick a remaining element…
-		i = Math.floor(Math.random() * m--);
+		i = Math.floor(Math.random()* m--);
 
 		// And swap it with the current element.
 		t = array[m];
@@ -109,7 +112,7 @@ function clearCurrentCards() {
 	}
 }
 
-resetBoard();
+// resetBoard();
 
 function setCardListeners() {
 	for (i = 0; i < cards.length; i++) {
@@ -120,6 +123,7 @@ function setCardListeners() {
 				setCardCondition(this);
 				checkCards();
 			}
+            console.log(trackedSeconds)
 		});
 	}
 }
@@ -134,6 +138,7 @@ function resetBoard() {
 	for (i = 0; i < cards.length; i++) {
 		cards[i].style.backgroundColor = 'white';
 	}
+    resetTimer()
 	winCon = 0;
 	resetCards();
 }
@@ -174,8 +179,13 @@ function checkWin() {
 		}
 	}
 	if (winCon === gameSize) {
+        clearInterval(pageTimer)
 		setTimeout(() => {
-			alert(`You found all ${gameSize / 2} matches in ${clickCount} clicks!`);
+			alert(
+				`You found all ${
+					gameSize / 2
+				} matches in ${clickCount} clicks and ${min} minutes ${sec} seconds!`
+			);
 		}, 10);
 	} else {
 		winCon = 0;
@@ -241,20 +251,25 @@ function trackClickCount() {
 
 //https://www.codegrepper.com/code-examples/html/html+timer
 //https://www.w3schools.com/jsref/met_win_setinterval.asp
-let trackedSeconds = 0;
+
 function trackTime() {
 	trackedSeconds++;
 	displayTime();
 }
-let min = 0;
-let sec = 0;
+let min = '';
+let sec = '';
 const timer = document.querySelector('#timer');
 function displayTime() {
 	min = parseInt(trackedSeconds / 60);
-	console.log(min);
 	sec = trackedSeconds - min * 60;
 	timer.innerText = `Timer ${min}:${sec}`;
 }
 
-let pageTimer = setInterval(function(){
-    trackTime()}, 1000);
+
+function resetTimer() {
+	clearInterval(pageTimer);
+    trackedSeconds = '';
+    pageTimer = setInterval(function () {
+        trackTime();
+    }, 1000);
+}
