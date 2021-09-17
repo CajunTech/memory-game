@@ -1,7 +1,13 @@
 console.log('script file linked');
 let gameSize = 16;
-let firstChoice = '';
-let secondChoice = '';
+const firstChoice = {
+    id: '',
+    color: 'white'   
+}
+const secondChoice = {
+    id: '',
+    color: 'white'   
+}
 let winCon = 1;
 
 let cardColors = [
@@ -60,6 +66,7 @@ for (i = 0; i < cards.length; i++) {
 			// console.log(`Card ${this.id} clicked`);
             flipCard(this)
             setCardCondition(this)
+            checkCards()
             
         }
 		// event.preventDefault()
@@ -71,8 +78,7 @@ function resetBoard() {
 	for (i = 0; i < cards.length; i++) {
 		cards[i].style.backgroundColor = 'white';
 	}
-	firstChoice = '';
-	secondChoice = '';
+	resetCards()
 }
 //change color on flip
 function flipCard(c) {
@@ -80,22 +86,28 @@ function flipCard(c) {
 }
 
 function setCardCondition(c) {
-    if (firstChoice === '') {
-        firstChoice = c.style.backgroundColor
+    if (firstChoice.id === '') {
+        firstChoice.id = c.id 
+        firstChoice.color = c.style.backgroundColor
     } else if
-        (secondChoice === '') {
-            secondChoice = c.style.backgroundColor
+        (secondChoice.id === '') {
+            secondChoice.id = c.id
+            secondChoice.color = c.style.backgroundColor
         }
-    console.log(`FC = ${firstChoice}`)
-    console.log(`SC = ${secondChoice}`)     
+    console.log(`FC = ${firstChoice.id}`)
+    console.log(`FC = ${firstChoice.color}`)
+    console.log(`SC = ${secondChoice.id}`)  
+    console.log(`SC = ${secondChoice.color}`)      
 }        
 
 function checkCards() {
-    if (firstChoice != '' && secondChoice != '') {
-        if (firstChoice === secondChoice) {
+    if (firstChoice.id != '' && secondChoice.id != '') {
+        if (firstChoice.color === secondChoice.color) {
             checkWin()
         } else {
-
+            cards[firstChoice.id].style.backgroundColor = 'white'
+            cards[secondChoice.id].style.backgroundColor = 'white'
+            resetCards()
         }
     }
 }
@@ -106,7 +118,19 @@ function checkWin () {
             winCon++
         }
     }
-    if (winCon = gameSize) {
+    if (winCon === gameSize) {
         alert("We have a winner")
+    } else {
+        winCon = 1
+        // cards[firstChoice.id].style.backgroundColor = 'white'
+        // cards[secondChoice.id].style.backgroundColor = 'white'
+        resetCards()
     }
+    console.log (`WinCon = ${winCon}`)
 } 
+function resetCards() {
+    firstChoice.id = '';
+    firstChoice.color = 'white';
+	secondChoice.id = '';
+    secondChoice.color = 'white';
+}
