@@ -53,24 +53,36 @@ const colorMaster = [
 	'blue',
 	'purple',
 	'purple',
-	'chocolate',
-	'chocolate',
+	'brown',
+	'brown',
+    'cyan',
+    'cyan',
+    'lime',
+    'lime',
+    'grey',
+    'grey',
+    'deeppink',
+    'deeppink',
+    'slateblue',
+    'slateblue',
+    'burlywood',
+    'burlywood',
+    'lightseagreen',
+    'lightseagreen'
 ];
 
 let cardColorsForGame = []
 function setCardColorsForGame () {
+    cardColorsForGame = []
     for (i=0;i<gameSize;i++) {
         cardColorsForGame.push(colorMaster[i])
     }
-    console.log(cardColorsForGame)
     cardsForGame = shuffle(cardColorsForGame);
-    console.log(cardsForGame)
 }
 const clickCounter = document.querySelector('#clickCounter');
 let clickCount;
 let busy = false;
 let cardsForGame = [ ]
-// console.log(cardsForGame);
 
 //https://bost.ocks.org/mike/shuffle/ - Fisher-Yates Shuffle
 function shuffle(array) {
@@ -111,7 +123,6 @@ function buildBoard() {
 	resetBoard();
 	clickCount = 0;
 	clickCounter.innerHTML = 'Click Counter: 0';
-	console.log(cards);
 }
 //https://css-tricks.com/snippets/javascript/remove-element/
 function clearCurrentCards() {
@@ -121,14 +132,12 @@ function clearCurrentCards() {
 	}
 }
 
-// let cards = document.querySelectorAll('.card');
 resetBoard();
 
 function setCardListeners() {
 	for (i = 0; i < cards.length; i++) {
 		cards[i].addEventListener('click', function selectCard(event) {
 			if (this.style.backgroundColor === 'white' && !busy) {
-				// console.log(`Card ${this.id} clicked`);
 				flipCard(this);
 				trackClickCount();
 				setCardCondition(this);
@@ -164,10 +173,6 @@ function setCardCondition(c) {
 		secondChoice.id = c.id;
 		secondChoice.color = c.style.backgroundColor;
 	}
-	// console.log(`FC = ${firstChoice.id}`);
-	// console.log(`FC = ${firstChoice.color}`);
-	// console.log(`SC = ${secondChoice.id}`);
-	// console.log(`SC = ${secondChoice.color}`);
 }
 
 function checkCards() {
@@ -191,7 +196,6 @@ function checkWin() {
 			winCon = winCon + 1;
 		}
 	}
-	console.log(`WinCon = ${winCon}`);
 	if (winCon === gameSize) {
 		setTimeout(() => {
 			alert(`You found all ${gameSize / 2} matches in ${clickCount} clicks!`);
@@ -200,7 +204,6 @@ function checkWin() {
 		winCon = 0;
 		resetCards();
 	}
-	// console.log(`WinCon = ${winCon}`);
 }
 function resetCards() {
 	firstChoice.id = '';
@@ -217,7 +220,6 @@ buttonD1.addEventListener('click', function d1(event) {
 	dRows = 'repeat(4, 150px)';
 	cardWidth = '140px';
 	cardHeight = '140px';
-
 	buildBoard();
 });
 
