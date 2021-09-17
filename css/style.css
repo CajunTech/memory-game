@@ -18,3 +18,9 @@ body {
 	background-color: white;
     margin: 20px auto;
 }
+#resetButton {
+    margin: 40px auto;
+    width: 120px;
+    height: 40px;
+    font-size: large;
+}

@@ -1,4 +1,3 @@
-console.log('script file linked');
 let gameSize = 16;
 let firstChoice = {
 	id: '',
@@ -28,9 +27,9 @@ let cardColors = [
 	'pink',
 	'pink',
 ];
-
+let busy = false
 let cardsForGame = shuffle(cardColors);
-console.log(cardsForGame);
+// console.log(cardsForGame);
 
 //https://bost.ocks.org/mike/shuffle/ - Fisher-Yates Shuffle
 function shuffle(array) {
@@ -60,23 +59,28 @@ for (i = 0; i < gameSize; i++) {
 let cards = document.querySelectorAll('.card');
 resetBoard();
 
-	for (i = 0; i < cards.length; i++) {
-		cards[i].addEventListener('click', function selectCard(event) {
-			if (this.style.backgroundColor === 'white') {
-				// console.log(`Card ${this.id} clicked`);
-				flipCard(this);
-				setCardCondition(this);
-				checkCards();
-			}
-		});
-	}
+for (i = 0; i < cards.length; i++) {
+	cards[i].addEventListener('click', function selectCard(event) {
+		if ((this.style.backgroundColor === 'white') && !busy) {
+			// console.log(`Card ${this.id} clicked`);
+			flipCard(this);
+			setCardCondition(this);
+			checkCards();
+		}
+	});
+}
 
+const resetButton = document.querySelector('#resetButton');
+resetButton.addEventListener('click', function reset() {
+	resetBoard();
+});
 
 //reset board back to defaults - also used to set initial board state
 function resetBoard() {
 	for (i = 0; i < cards.length; i++) {
 		cards[i].style.backgroundColor = 'white';
 	}
+	winCon = 0;
 	resetCards();
 }
 //change color on flip
@@ -92,14 +96,15 @@ function setCardCondition(c) {
 		secondChoice.id = c.id;
 		secondChoice.color = c.style.backgroundColor;
 	}
-	console.log(`FC = ${firstChoice.id}`);
-	console.log(`FC = ${firstChoice.color}`);
-	console.log(`SC = ${secondChoice.id}`);
-	console.log(`SC = ${secondChoice.color}`);
+	// console.log(`FC = ${firstChoice.id}`);
+	// console.log(`FC = ${firstChoice.color}`);
+	// console.log(`SC = ${secondChoice.id}`);
+	// console.log(`SC = ${secondChoice.color}`);
 }
 
 function checkCards() {
 	if (firstChoice.id != '' && secondChoice.id != '') {
+        busy = true
 		if (firstChoice.color === secondChoice.color) {
 			checkWin();
 		} else {
@@ -107,7 +112,7 @@ function checkCards() {
 				cards[firstChoice.id].style.backgroundColor = 'white';
 				cards[secondChoice.id].style.backgroundColor = 'white';
 				resetCards();
-			}, 200);
+			}, 500);
 		}
 	}
 }
@@ -120,20 +125,19 @@ function checkWin() {
 	}
 	console.log(`WinCon = ${winCon}`);
 	if (winCon === gameSize) {
-		setTimeout(() => {alert('We have a winner')}, 10)
+		setTimeout(() => {
+			alert('We have a winner');
+		}, 10);
 	} else {
 		winCon = 0;
-		// cards[firstChoice.id].style.backgroundColor = 'white'
-		// cards[secondChoice.id].style.backgroundColor = 'white'
 		resetCards();
 	}
-	console.log(`WinCon = ${winCon}`);
+	// console.log(`WinCon = ${winCon}`);
 }
 function resetCards() {
 	firstChoice.id = '';
 	firstChoice.color = 'white';
 	secondChoice.id = '';
 	secondChoice.color = 'white';
+    busy = false
 }
-
-
