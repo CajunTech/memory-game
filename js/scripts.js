@@ -240,17 +240,19 @@ function trackClickCount() {
 }
 
 //https://www.codegrepper.com/code-examples/html/html+timer
-let trackedSeconds = 0;
+let trackedSeconds = 1667;
 function trackTime() {
-    trackedSeconds++;
-
+	trackedSeconds++;
+	displayTime();
 }
-let min 
-let sec = 149
-function displayTime () {
-min = parseInt(trackedSeconds/60)
-console.log(min)
-sec = trackedSeconds - min*60
+let min = 0;
+let sec = 0;
+const timer = document.querySelector('#timer');
+function displayTime() {
+	min = parseInt(trackedSeconds / 60);
+	console.log(min);
+	sec = trackedSeconds - min * 60;
+	timer.innerText = `Timer ${min}:${sec}`;
 }
 
-displayTime()
+displayTime();
