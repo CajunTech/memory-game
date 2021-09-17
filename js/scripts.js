@@ -9,7 +9,7 @@ let secondChoice = {
 };
 let winCon = 0;
 
-let cardColors = [
+let cardColors16 = [
 	'red',
 	'red',
 	'green',
@@ -28,7 +28,7 @@ let cardColors = [
 	'pink',
 ];
 let busy = false
-let cardsForGame = shuffle(cardColors);
+let cardsForGame = shuffle(cardColors16);
 // console.log(cardsForGame);
 
 //https://bost.ocks.org/mike/shuffle/ - Fisher-Yates Shuffle
