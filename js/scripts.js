@@ -8,7 +8,7 @@ let secondChoice = {
 	color: 'white',
 };
 let winCon = 0;
-
+let cards;
 let cardColors16 = [
 	'red',
 	'red',
@@ -27,7 +27,7 @@ let cardColors16 = [
 	'pink',
 	'pink',
 ];
-let busy = false
+let busy = false;
 let cardsForGame = shuffle(cardColors16);
 // console.log(cardsForGame);
 
@@ -48,20 +48,33 @@ function shuffle(array) {
 	return array;
 }
 
-for (i = 0; i < gameSize; i++) {
-	document
-		.querySelector('.board')
-		.appendChild(document.createElement('div'))
-		.setAttribute('id', i);
-	document.getElementById(i).setAttribute('class', 'card');
+buildBoard();
+function buildBoard() {
+	clearCurrentCards()
+	for (i = 0; i < gameSize; i++) {
+		document
+			.querySelector('.board')
+			.appendChild(document.createElement('div'))
+			.setAttribute('id', i);
+		document.getElementById(i).setAttribute('class', 'card');
+	}
+	cards = document.querySelectorAll('.card');
+	resetBoard();
 }
 
-let cards = document.querySelectorAll('.card');
+function clearCurrentCards() {
+	let removeCards = document.querySelector('.board');
+	while (removeCards.firstChild) {
+		removeCards.removeChild(removeCards.firstChild);
+	}
+}
+
+// let cards = document.querySelectorAll('.card');
 resetBoard();
 
 for (i = 0; i < cards.length; i++) {
 	cards[i].addEventListener('click', function selectCard(event) {
-		if ((this.style.backgroundColor === 'white') && !busy) {
+		if (this.style.backgroundColor === 'white' && !busy) {
 			// console.log(`Card ${this.id} clicked`);
 			flipCard(this);
 			setCardCondition(this);
@@ -104,7 +117,7 @@ function setCardCondition(c) {
 
 function checkCards() {
 	if (firstChoice.id != '' && secondChoice.id != '') {
-        busy = true
+		busy = true;
 		if (firstChoice.color === secondChoice.color) {
 			checkWin();
 		} else {
@@ -139,5 +152,19 @@ function resetCards() {
 	firstChoice.color = 'white';
 	secondChoice.id = '';
 	secondChoice.color = 'white';
-    busy = false
+	busy = false;
 }
+
+const button36 = document.querySelector('#button36');
+button36.addEventListener('click', function difficulty36(event) {
+	gameSize = 36;
+	buildBoard();
+});
+
+const button64 = document.querySelector('#button64');
+button64.addEventListener('click', function difficulty36() {
+	gameSize = 64;
+    
+	buildBoard();
+	// console.log('button64clicked');
+});
