@@ -2,6 +2,7 @@ console.log('script file linked');
 let gameSize = 16;
 let firstChoice = '';
 let secondChoice = '';
+let winCon = 1;
 
 let cardColors = [
 	'red',
@@ -58,13 +59,14 @@ for (i = 0; i < cards.length; i++) {
 		if (this.style.backgroundColor === 'white') {
 			// console.log(`Card ${this.id} clicked`);
             flipCard(this)
+            setCardCondition(this)
             
         }
 		// event.preventDefault()
 		// console.log(`Card ${this.id} clicked`);
 	});
 }
-
+//reset board back to defaults - also used to set initial board state
 function resetBoard() {
 	for (i = 0; i < cards.length; i++) {
 		cards[i].style.backgroundColor = 'white';
@@ -72,6 +74,39 @@ function resetBoard() {
 	firstChoice = '';
 	secondChoice = '';
 }
+//change color on flip
 function flipCard(c) {
     c.style.backgroundColor = cardsForGame[c.id]
 }
+
+function setCardCondition(c) {
+    if (firstChoice === '') {
+        firstChoice = c.style.backgroundColor
+    } else if
+        (secondChoice === '') {
+            secondChoice = c.style.backgroundColor
+        }
+    console.log(`FC = ${firstChoice}`)
+    console.log(`SC = ${secondChoice}`)     
+}        
+
+function checkCards() {
+    if (firstChoice != '' && secondChoice != '') {
+        if (firstChoice === secondChoice) {
+            checkWin()
+        } else {
+
+        }
+    }
+}
+
+function checkWin () {
+    for (i=0; i< cards.length; i++) {
+        if (cards[i].style.backgroundColor != 'white') {
+            winCon++
+        }
+    }
+    if (winCon = gameSize) {
+        alert("We have a winner")
+    }
+} 
