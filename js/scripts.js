@@ -238,3 +238,19 @@ function trackClickCount() {
 	clickCount++;
 	clickCounter.innerText = `Click Counter: ${clickCount}`;
 }
+
+//https://www.codegrepper.com/code-examples/html/html+timer
+let trackedSeconds = 0;
+function trackTime() {
+    trackedSeconds++;
+
+}
+let min 
+let sec = 149
+function displayTime () {
+min = parseInt(trackedSeconds/60)
+console.log(min)
+sec = trackedSeconds - min*60
+}
+
+displayTime()
