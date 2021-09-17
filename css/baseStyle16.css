@@ -2,21 +2,27 @@ body {
     background-color: black;
     color: rgba(255, 255, 255, 0.893);
     text-align: center;
+    align-content: center;
+    max-width: 800px;
+    min-width: 600px;
+    margin:10px auto;
 }
 
 .board {
-    width: 800px;
+    width: 600px;
+    height: 600px;
 	display: grid;
-	grid-template-columns: repeat(4, auto);
+	grid-template-columns: repeat(4, 150px);
 	/* justify-content: center; */
-    align-content: space-around;
+    grid-template-rows: repeat(4, 150px);
+    align-content: space-between;
 	margin: 10px auto;
 }
 .card{
     width: 120px;
 	height: 120px;
 	background-color: white;
-    margin: 20px auto;
+    margin: 10px auto;
 }
 #resetButton {
     margin: 40px auto;
@@ -24,3 +30,44 @@ body {
     height: 40px;
     font-size: large;
 }
+
+.difficultySelect {
+    display: inline-flex;
+    align-items: left;
+}
+
+#clickCounter {
+   background-color: grey;
+   width: 150px;
+   border-radius: 10px; 
+}
+
+/* .counter { */
+    /* width:70px;
+        height:auto;
+        background:#CC0000;
+        color:#FFF;
+        padding:10px 20px; 
+        text-align:center;
+        top:0;
+        position:fixed;
+        top: 50px;
+        left: 0px;  */
+
+/* 
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    float: left;
+    position: fixed;
+    width: 150px;
+    height: 20px;
+    background-color: grey;
+    border-radius: 10px;
+    text-align: justify;
+    word-wrap: normal;
+}
+{ 
+    margin: 0px auto;
+    align-content: left; */
+/* } */

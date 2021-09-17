@@ -8,7 +8,12 @@ let secondChoice = {
 	color: 'white',
 };
 let winCon = 0;
+const board = document.getElementById('board');
 let cards;
+let dColumns = 'repeat(4, 150px)'
+let dRows = 'repeat(4, 150px)';
+let cardWidth = '140px';
+let cardHeight = '140px';
 let cardColors16 = [
 	'red',
 	'red',
@@ -27,6 +32,13 @@ let cardColors16 = [
 	'pink',
 	'pink',
 ];
+//cardColorsForGame
+//for (i=0;i<gameSize;i++) {
+//push colors from master array into cardColorsforGame
+//}
+//let cardsForGame = shuffle(cardColorsforGame)
+
+
 let busy = false;
 let cardsForGame = shuffle(cardColors16);
 // console.log(cardsForGame);
@@ -50,7 +62,7 @@ function shuffle(array) {
 
 buildBoard();
 function buildBoard() {
-	clearCurrentCards()
+	clearCurrentCards();
 	for (i = 0; i < gameSize; i++) {
 		document
 			.querySelector('.board')
@@ -59,9 +71,17 @@ function buildBoard() {
 		document.getElementById(i).setAttribute('class', 'card');
 	}
 	cards = document.querySelectorAll('.card');
+    sizeSet = document.getElementsByClassName('.card')
+	board.style.gridTemplateColumns = dColumns;
+    board.style.gridTemplateRows = dRows;
+    for (i=0; i<cards.length;i++) {
+        setSize(cards[i])
+    }
+    setCardListeners()
 	resetBoard();
+    console.log(cards)
 }
-
+//https://css-tricks.com/snippets/javascript/remove-element/
 function clearCurrentCards() {
 	let removeCards = document.querySelector('.board');
 	while (removeCards.firstChild) {
@@ -72,6 +92,7 @@ function clearCurrentCards() {
 // let cards = document.querySelectorAll('.card');
 resetBoard();
 
+function setCardListeners() {
 for (i = 0; i < cards.length; i++) {
 	cards[i].addEventListener('click', function selectCard(event) {
 		if (this.style.backgroundColor === 'white' && !busy) {
@@ -81,6 +102,7 @@ for (i = 0; i < cards.length; i++) {
 			checkCards();
 		}
 	});
+}
 }
 
 const resetButton = document.querySelector('#resetButton');
@@ -155,16 +177,48 @@ function resetCards() {
 	busy = false;
 }
 
-const button36 = document.querySelector('#button36');
-button36.addEventListener('click', function difficulty36(event) {
-	gameSize = 36;
+const buttonD1 = document.querySelector('#buttonD1');
+buttonD1.addEventListener('click', function d1(event) {
+	gameSize = 16;
+	dColumns = 'repeat(4, 150px)'
+    dRows = 'repeat(4, 150px)'
+    cardWidth = '140px'
+    cardHeight = '140px'
+
 	buildBoard();
 });
 
-const button64 = document.querySelector('#button64');
-button64.addEventListener('click', function difficulty36() {
-	gameSize = 64;
-    
+const buttonD2 = document.querySelector('#buttonD2');
+buttonD2.addEventListener('click', function d2(event) {
+	gameSize = 20;
+	dColumns = 'repeat(5, 120px)';
+    dRows = 'repeat(4, 150px)'
+    cardWidth = '110px'
+    cardHeight = '110px'
 	buildBoard();
-	// console.log('button64clicked');
 });
+
+const buttonD3 = document.querySelector('#buttonD3');
+buttonD3.addEventListener('click', function d3() {
+	gameSize = 24;
+	dColumns = 'repeat(6, 100px)';
+    dRows = 'repeat(4, 150px)'
+    cardWidth = '90px'
+    cardHeight = '90px'
+	buildBoard();
+});
+
+const buttonD4 = document.querySelector('#buttonD4');
+buttonD4.addEventListener('click', function d4() {
+	gameSize = 30;
+	dColumns = 'repeat(6, 100px)';
+    dRows = 'repeat(5, 120px)'
+    cardWidth = '90px'
+    cardHeight = '90px'
+	buildBoard();
+});
+
+function setSize(c) {
+    c.style.width = cardWidth;
+	c.style.height = cardHeight;
+}
