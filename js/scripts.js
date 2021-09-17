@@ -14,29 +14,6 @@ let dColumns = 'repeat(4, 150px)';
 let dRows = 'repeat(4, 150px)';
 let cardWidth = '140px';
 let cardHeight = '140px';
-// let cardColors16 = [
-// 	'red',
-// 	'red',
-// 	'green',
-// 	'green',
-// 	'purple',
-// 	'purple',
-// 	'yellow',
-// 	'yellow',
-// 	'blue',
-// 	'blue',
-// 	'orange',
-// 	'orange',
-// 	'brown',
-// 	'brown',
-// 	'pink',
-// 	'pink',
-// ];
-//cardColorsForGame
-//for (i=0;i<gameSize;i++) {
-//push colors from master array into cardColorsforGame
-//}
-//let cardsForGame = shuffle(cardColorsforGame)
 
 const colorMaster = [
 	'pink',
@@ -55,34 +32,34 @@ const colorMaster = [
 	'purple',
 	'brown',
 	'brown',
-    'cyan',
-    'cyan',
-    'lime',
-    'lime',
-    'grey',
-    'grey',
-    'deeppink',
-    'deeppink',
-    'slateblue',
-    'slateblue',
-    'burlywood',
-    'burlywood',
-    'lightseagreen',
-    'lightseagreen'
+	'cyan',
+	'cyan',
+	'lime',
+	'lime',
+	'grey',
+	'grey',
+	'deeppink',
+	'deeppink',
+	'slateblue',
+	'slateblue',
+	'burlywood',
+	'burlywood',
+	'lightseagreen',
+	'lightseagreen',
 ];
 
-let cardColorsForGame = []
-function setCardColorsForGame () {
-    cardColorsForGame = []
-    for (i=0;i<gameSize;i++) {
-        cardColorsForGame.push(colorMaster[i])
-    }
-    cardsForGame = shuffle(cardColorsForGame);
+let cardColorsForGame = [];
+function setCardColorsForGame() {
+	cardColorsForGame = [];
+	for (i = 0; i < gameSize; i++) {
+		cardColorsForGame.push(colorMaster[i]);
+	}
+	cardsForGame = shuffle(cardColorsForGame);
 }
 const clickCounter = document.querySelector('#clickCounter');
 let clickCount;
 let busy = false;
-let cardsForGame = [ ]
+let cardsForGame = [];
 
 //https://bost.ocks.org/mike/shuffle/ - Fisher-Yates Shuffle
 function shuffle(array) {
@@ -104,7 +81,7 @@ function shuffle(array) {
 buildBoard();
 function buildBoard() {
 	clearCurrentCards();
-    setCardColorsForGame()
+	setCardColorsForGame();
 	for (i = 0; i < gameSize; i++) {
 		document
 			.querySelector('.board')
