@@ -240,7 +240,8 @@ function trackClickCount() {
 }
 
 //https://www.codegrepper.com/code-examples/html/html+timer
-let trackedSeconds = 1667;
+//https://www.w3schools.com/jsref/met_win_setinterval.asp
+let trackedSeconds = 0;
 function trackTime() {
 	trackedSeconds++;
 	displayTime();
@@ -255,4 +256,5 @@ function displayTime() {
 	timer.innerText = `Timer ${min}:${sec}`;
 }
 
-displayTime();
+let pageTimer = setInterval(function(){
+    trackTime()}, 1000);
