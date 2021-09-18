@@ -27,6 +27,7 @@ body {
     margin: 0px auto;
     border-radius: 20px;
     /* background-image: url('../assets/img/astro.jpg'); */
+    background-size:contain;
     
 }
 .button {

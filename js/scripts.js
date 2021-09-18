@@ -7,6 +7,10 @@ let secondChoice = {
 	id: '',
 	color: 'white',
 };
+let themes = [
+    ['space',`url('./assets/img/pgal.jpeg')`,`url('./assets/img/astro.jpg')`],
+]
+let randomTheme
 let winCon = 0;
 const board = document.getElementById('board');
 let cards;
@@ -47,8 +51,8 @@ const colorMaster = [
 	'lightseagreen',
 	'lightseagreen',
 ];
-let cardBackgroundImg = `url('./assets/img/astro.jpg')`
-let bodyBackgroundImg = `url('./assets/img/pgal.jpeg')`
+let cardBackgroundImg
+let bodyBackgroundImg
 let cardColorsForGame = [];
 function setCardColorsForGame() {
 	cardColorsForGame = [];
@@ -133,7 +137,7 @@ function setCardListeners() {
 
 const resetButton = document.querySelector('#resetButton');
 resetButton.addEventListener('click', function reset() {
-	resetBoard();
+	buildBoard();
 });
 
 //reset board back to defaults - also used to set initial board state
@@ -246,6 +250,21 @@ buttonD4.addEventListener('click', function d4() {
 	buildBoard();
 });
 
+const themeButoon = document.querySelector('#themeButton');
+themeButton.addEventListener('click', function ranTheme() {
+	randomTheme = Math.floor(Math.random()*themes.length)
+    console.log(randomTheme)
+    bodyBackgroundImg = themes[randomTheme][1]
+    cardBackgroundImg = themes[randomTheme][2]
+    // buildBoard()
+    document.querySelector('body').style.backgroundImage = bodyBackgroundImg
+    for (i=0;i<cards.length;i++) {
+        if (cards[i].style.backgroundColor === 'white') {
+        setCardBackgroundImg(cards[i])
+        }
+    }
+});
+
 function setSize(c) {
 	c.style.width = cardWidth;
 	c.style.height = cardHeight;
@@ -282,3 +301,6 @@ function resetTimer() {
         trackTime();
     }, 1000);
 }
+
+
+console.log(themes)
