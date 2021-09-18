@@ -47,7 +47,8 @@ const colorMaster = [
 	'lightseagreen',
 	'lightseagreen',
 ];
-
+let cardBackgroundImg = `url('./assets/img/astro.jpg')`
+let bodyBackgroundImg = `url('./assets/img/pgal.jpeg')`
 let cardColorsForGame = [];
 function setCardColorsForGame() {
 	cardColorsForGame = [];
@@ -98,7 +99,9 @@ function buildBoard() {
 	board.style.gridTemplateRows = dRows;
 	for (i = 0; i < cards.length; i++) {
 		setSize(cards[i]);
+        setCardBackgroundImg(cards[i]);
 	}
+    document.querySelector('body').style.backgroundImage = bodyBackgroundImg
 	setCardListeners();
 	resetBoard();
 	clickCount = 0;
@@ -144,6 +147,7 @@ function resetBoard() {
 }
 //change color on flip
 function flipCard(c) {
+    c.style.backgroundImage = null
 	c.style.backgroundColor = cardsForGame[c.id];
 }
 
@@ -166,6 +170,8 @@ function checkCards() {
 			setTimeout(() => {
 				cards[firstChoice.id].style.backgroundColor = 'white';
 				cards[secondChoice.id].style.backgroundColor = 'white';
+                cards[firstChoice.id].style.backgroundImage = cardBackgroundImg;
+				cards[secondChoice.id].style.backgroundImage = cardBackgroundImg;
 				resetCards();
 			}, 500);
 		}
@@ -243,6 +249,9 @@ buttonD4.addEventListener('click', function d4() {
 function setSize(c) {
 	c.style.width = cardWidth;
 	c.style.height = cardHeight;
+}
+function setCardBackgroundImg(c) {
+    c.style.backgroundImage = cardBackgroundImg
 }
 function trackClickCount() {
 	clickCount++;
