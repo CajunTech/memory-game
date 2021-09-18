@@ -9,6 +9,13 @@ let secondChoice = {
 };
 let themes = [
     ['space',`url('./assets/img/pgal.jpeg')`,`url('./assets/img/astro.jpg')`],
+    ['horror1',`url('./assets/img/jigsaw.jpg')`,`url('./assets/img/jigsawww.jpeg')`],
+    ['windows1',`url('./assets/img/bsodWin8.jpeg')`,`url('./assets/img/winHG.jpeg')`],
+    ['eve1',`url('./assets/img/eve1.jpeg')`,`url('./assets/img/eveicon.png')`],
+    ['xmas1',`url('./assets/img/xmas2bg.jpg')`,`url('./assets/img/merryxmasicon.jpeg')`],
+    ['xmas2',`url('./assets/img/xmas1bg.jpg')`,`url('./assets/img/xmasmt.jpeg')`],
+    ['sw1',`url('./assets/img/sw1bg.jpeg')`,`url('./assets/img/yoda1.jpeg')`],
+    ['sw2',`url('./assets/img/swzoombg.jpeg')`,`url('./assets/img/bb8icon.png')`]
 ]
 let randomTheme
 let winCon = 0;
