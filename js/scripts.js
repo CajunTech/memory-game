@@ -8,16 +8,36 @@ let secondChoice = {
 	color: 'white',
 };
 let themes = [
-    ['space',`url('./assets/img/pgal.jpeg')`,`url('./assets/img/astro.jpg')`],
-    ['horror1',`url('./assets/img/jigsaw.jpg')`,`url('./assets/img/jigsawww.jpeg')`],
-    ['windows1',`url('./assets/img/bsodWin8.jpeg')`,`url('./assets/img/winHG.jpeg')`],
-    ['eve1',`url('./assets/img/eve1.jpeg')`,`url('./assets/img/eveicon.png')`],
-    ['xmas1',`url('./assets/img/xmas2bg.jpg')`,`url('./assets/img/merryxmasicon.jpeg')`],
-    ['xmas2',`url('./assets/img/xmas1bg.jpg')`,`url('./assets/img/xmasmt.jpeg')`],
-    ['sw1',`url('./assets/img/sw1bg.jpeg')`,`url('./assets/img/yoda1.jpeg')`],
-    ['sw2',`url('./assets/img/swzoombg.jpeg')`,`url('./assets/img/bb8icon.png')`]
-]
-let randomTheme
+	['space', `url('./assets/img/pgal.jpeg')`, `url('./assets/img/astro.jpg')`],
+	[
+		'horror1',
+		`url('./assets/img/jigsaw.jpg')`,
+		`url('./assets/img/jigsawww.jpeg')`,
+	],
+	[
+		'windows1',
+		`url('./assets/img/bsodWin8.jpeg')`,
+		`url('./assets/img/winHG.jpeg')`,
+	],
+	['eve1', `url('./assets/img/eve1.jpeg')`, `url('./assets/img/eveicon.png')`],
+	[
+		'xmas1',
+		`url('./assets/img/xmas2bg.jpg')`,
+		`url('./assets/img/merryxmasicon.jpeg')`,
+	],
+	[
+		'xmas2',
+		`url('./assets/img/xmas1bg.jpg')`,
+		`url('./assets/img/xmasmt.jpeg')`,
+	],
+	['sw1', `url('./assets/img/sw1bg.jpeg')`, `url('./assets/img/yoda1.jpeg')`],
+	[
+		'sw2',
+		`url('./assets/img/swzoombg.jpeg')`,
+		`url('./assets/img/bb8icon.png')`,
+	],
+];
+let randomTheme;
 let winCon = 0;
 const board = document.getElementById('board');
 let cards;
@@ -29,47 +49,35 @@ let trackedSeconds = '';
 //colors used for underside of cards
 const colorMaster = [
 	'pink',
-	'pink',
-	'red',
 	'red',
 	'orange',
-	'orange',
-	'yellow',
 	'yellow',
 	'green',
-	'green',
-	'blue',
 	'blue',
 	'purple',
-	'purple',
-	'brown',
 	'brown',
 	'cyan',
-	'cyan',
-	'lime',
 	'lime',
 	'grey',
-	'grey',
-	'deeppink',
 	'deeppink',
 	'slateblue',
-	'slateblue',
 	'burlywood',
-	'burlywood',
-	'lightseagreen',
 	'lightseagreen',
 ];
-let cardBackgroundImg
-let bodyBackgroundImg
-let cardColorsForGame
+let cardBackgroundImg;
+let bodyBackgroundImg;
+let cardColorsForGame;
 
 //pulls colors from colorMaster based on number of cards chosen for board and shuffles colors
 function setCardColorsForGame() {
 	cardColorsForGame = [];
-	for (i = 0; i < gameSize; i++) {
-		cardColorsForGame.push(colorMaster[i]);
+	for (i = 0; i < gameSize / 2; i++) {
+		for (j = 0; j < 2; j++) {
+			cardColorsForGame.push(colorMaster[i]);
+		}
 	}
 	cardsForGame = shuffle(cardColorsForGame);
+	console.log(cardsForGame);
 }
 
 const clickCounter = document.querySelector('#clickCounter');
@@ -87,7 +95,7 @@ function shuffle(array) {
 	// While there remain elements to shuffle…
 	while (m) {
 		// Pick a remaining element…
-		i = Math.floor(Math.random()* m--);
+		i = Math.floor(Math.random() * m--);
 
 		// And swap it with the current element.
 		t = array[m];
@@ -118,9 +126,9 @@ function buildBoard() {
 	board.style.gridTemplateRows = dRows;
 	for (i = 0; i < cards.length; i++) {
 		setSize(cards[i]);
-        setCardBackgroundImg(cards[i]);
+		setCardBackgroundImg(cards[i]);
 	}
-    document.querySelector('body').style.backgroundImage = bodyBackgroundImg
+	document.querySelector('body').style.backgroundImage = bodyBackgroundImg;
 	setCardListeners();
 	resetBoard();
 	clickCount = 0;
@@ -145,7 +153,7 @@ function setCardListeners() {
 				setCardCondition(this);
 				checkCards();
 			}
-            console.log(trackedSeconds)
+			console.log(trackedSeconds);
 		});
 	}
 }
@@ -161,13 +169,13 @@ function resetBoard() {
 	for (i = 0; i < cards.length; i++) {
 		cards[i].style.backgroundColor = 'white';
 	}
-    resetTimer()
+	resetTimer();
 	winCon = 0;
 	resetCards();
 }
 //change color on flip
 function flipCard(c) {
-    c.style.backgroundImage = null
+	c.style.backgroundImage = null;
 	c.style.backgroundColor = cardsForGame[c.id];
 }
 
@@ -192,7 +200,7 @@ function checkCards() {
 			setTimeout(() => {
 				cards[firstChoice.id].style.backgroundColor = 'white';
 				cards[secondChoice.id].style.backgroundColor = 'white';
-                cards[firstChoice.id].style.backgroundImage = cardBackgroundImg;
+				cards[firstChoice.id].style.backgroundImage = cardBackgroundImg;
 				cards[secondChoice.id].style.backgroundImage = cardBackgroundImg;
 				resetCards();
 			}, 500);
@@ -208,7 +216,7 @@ function checkWin() {
 		}
 	}
 	if (winCon === gameSize) {
-        clearInterval(pageTimer)
+		clearInterval(pageTimer);
 		setTimeout(() => {
 			alert(
 				`You found all ${
@@ -271,29 +279,29 @@ buttonD4.addEventListener('click', function d4() {
 });
 //Button used to select random theme. decided not to add buildBoard call here
 //this allows user to change theme mid game and still continue without a reset
-//theme changes background of page and back of cards using matching image files pulled from 
+//theme changes background of page and back of cards using matching image files pulled from
 //themes array
 const themeButoon = document.querySelector('#themeButton');
 themeButton.addEventListener('click', function ranTheme() {
-	randomTheme = Math.floor(Math.random()*themes.length)
-    console.log(randomTheme)
-    bodyBackgroundImg = themes[randomTheme][1]
-    cardBackgroundImg = themes[randomTheme][2]
-    document.querySelector('body').style.backgroundImage = bodyBackgroundImg
-    for (i=0;i<cards.length;i++) {
-        if (cards[i].style.backgroundColor === 'white') {
-        setCardBackgroundImg(cards[i])
-        }
-    }
+	randomTheme = Math.floor(Math.random() * themes.length);
+	console.log(randomTheme);
+	bodyBackgroundImg = themes[randomTheme][1];
+	cardBackgroundImg = themes[randomTheme][2];
+	document.querySelector('body').style.backgroundImage = bodyBackgroundImg;
+	for (i = 0; i < cards.length; i++) {
+		if (cards[i].style.backgroundColor === 'white') {
+			setCardBackgroundImg(cards[i]);
+		}
+	}
 });
-//used to set size of cards for various 
+//used to set size of cards for various
 function setSize(c) {
 	c.style.width = cardWidth;
 	c.style.height = cardHeight;
 }
 //function used by buildBoard and randomtheme button to change image of cards
 function setCardBackgroundImg(c) {
-    c.style.backgroundImage = cardBackgroundImg
+	c.style.backgroundImage = cardBackgroundImg;
 }
 function trackClickCount() {
 	clickCount++;
@@ -316,14 +324,13 @@ function displayTime() {
 	timer.innerText = `Timer ${min}:${sec}`;
 }
 
-
 function resetTimer() {
 	clearInterval(pageTimer);
-    trackedSeconds = '';
-    pageTimer = setInterval(function () {
-        trackTime();
-    }, 1000);
+	trackedSeconds = '';
+	pageTimer = setInterval(function () {
+		trackTime();
+	}, 1000);
 }
 
+console.log(themes);
 
-console.log(themes)
