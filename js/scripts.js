@@ -26,6 +26,7 @@ let dRows = 'repeat(4, 150px)';
 let cardWidth = '140px';
 let cardHeight = '140px';
 let trackedSeconds = '';
+//colors used for underside of cards
 const colorMaster = [
 	'pink',
 	'pink',
@@ -60,7 +61,9 @@ const colorMaster = [
 ];
 let cardBackgroundImg
 let bodyBackgroundImg
-let cardColorsForGame = [];
+let cardColorsForGame
+
+//pulls colors from colorMaster based on number of cards chosen for board and shuffles colors
 function setCardColorsForGame() {
 	cardColorsForGame = [];
 	for (i = 0; i < gameSize; i++) {
@@ -68,6 +71,7 @@ function setCardColorsForGame() {
 	}
 	cardsForGame = shuffle(cardColorsForGame);
 }
+
 const clickCounter = document.querySelector('#clickCounter');
 let clickCount;
 let busy = false;
@@ -93,6 +97,10 @@ function shuffle(array) {
 	return array;
 }
 
+//function buidling board:
+//dynamically builds board based on number of cards chosen
+//sets up colors/backgrounds for cards/page, assigns click listeners, and starts timer
+//
 buildBoard();
 function buildBoard() {
 	clearCurrentCards();
@@ -118,6 +126,7 @@ function buildBoard() {
 	clickCount = 0;
 	clickCounter.innerHTML = 'Click Counter: 0';
 }
+//clears all cards - called by buildBoard function
 //https://css-tricks.com/snippets/javascript/remove-element/
 function clearCurrentCards() {
 	let removeCards = document.querySelector('.board');
@@ -126,8 +135,7 @@ function clearCurrentCards() {
 	}
 }
 
-// resetBoard();
-
+//sets click listeners on all cards - called by buildBoard function
 function setCardListeners() {
 	for (i = 0; i < cards.length; i++) {
 		cards[i].addEventListener('click', function selectCard(event) {
@@ -142,12 +150,13 @@ function setCardListeners() {
 	}
 }
 
+//button to reset board
 const resetButton = document.querySelector('#resetButton');
 resetButton.addEventListener('click', function reset() {
 	buildBoard();
 });
 
-//reset board back to defaults - also used to set initial board state
+//reset board back to defaults - called by buildboard
 function resetBoard() {
 	for (i = 0; i < cards.length; i++) {
 		cards[i].style.backgroundColor = 'white';
@@ -162,6 +171,7 @@ function flipCard(c) {
 	c.style.backgroundColor = cardsForGame[c.id];
 }
 
+//tracks player card choices - called on click
 function setCardCondition(c) {
 	if (firstChoice.id === '') {
 		firstChoice.id = c.id;
@@ -171,7 +181,8 @@ function setCardCondition(c) {
 		secondChoice.color = c.style.backgroundColor;
 	}
 }
-
+// checks if player choices match, sets busy flag to stop click event functionality
+// and allows user to see colors if wrong choice (delay)
 function checkCards() {
 	if (firstChoice.id != '' && secondChoice.id != '') {
 		busy = true;
@@ -188,7 +199,8 @@ function checkCards() {
 		}
 	}
 }
-
+//checks if user has gotten all cards correct. if all background colors are no longer white
+//ends game and triggers alert
 function checkWin() {
 	for (i = 0; i < cards.length; i++) {
 		if (cards[i].style.backgroundColor != 'white') {
@@ -209,6 +221,8 @@ function checkWin() {
 		resetCards();
 	}
 }
+//resets card choice/background color of chosen cards and removes busy block on click events
+//called by checkCards function if user choices do not match
 function resetCards() {
 	firstChoice.id = '';
 	firstChoice.color = 'white';
@@ -217,6 +231,8 @@ function resetCards() {
 	busy = false;
 }
 
+//following 4 fucntions are buttons representing different difficulty levels of game.
+//change number of cards displayed, size grid/cards appropriately and then call buildBoard function
 const buttonD1 = document.querySelector('#buttonD1');
 buttonD1.addEventListener('click', function d1(event) {
 	gameSize = 16;
@@ -226,7 +242,6 @@ buttonD1.addEventListener('click', function d1(event) {
 	cardHeight = '140px';
 	buildBoard();
 });
-
 const buttonD2 = document.querySelector('#buttonD2');
 buttonD2.addEventListener('click', function d2(event) {
 	gameSize = 20;
@@ -236,7 +251,6 @@ buttonD2.addEventListener('click', function d2(event) {
 	cardHeight = '110px';
 	buildBoard();
 });
-
 const buttonD3 = document.querySelector('#buttonD3');
 buttonD3.addEventListener('click', function d3() {
 	gameSize = 24;
@@ -246,7 +260,6 @@ buttonD3.addEventListener('click', function d3() {
 	cardHeight = '90px';
 	buildBoard();
 });
-
 const buttonD4 = document.querySelector('#buttonD4');
 buttonD4.addEventListener('click', function d4() {
 	gameSize = 30;
@@ -256,14 +269,16 @@ buttonD4.addEventListener('click', function d4() {
 	cardHeight = '90px';
 	buildBoard();
 });
-
+//Button used to select random theme. decided not to add buildBoard call here
+//this allows user to change theme mid game and still continue without a reset
+//theme changes background of page and back of cards using matching image files pulled from 
+//themes array
 const themeButoon = document.querySelector('#themeButton');
 themeButton.addEventListener('click', function ranTheme() {
 	randomTheme = Math.floor(Math.random()*themes.length)
     console.log(randomTheme)
     bodyBackgroundImg = themes[randomTheme][1]
     cardBackgroundImg = themes[randomTheme][2]
-    // buildBoard()
     document.querySelector('body').style.backgroundImage = bodyBackgroundImg
     for (i=0;i<cards.length;i++) {
         if (cards[i].style.backgroundColor === 'white') {
@@ -271,11 +286,12 @@ themeButton.addEventListener('click', function ranTheme() {
         }
     }
 });
-
+//used to set size of cards for various 
 function setSize(c) {
 	c.style.width = cardWidth;
 	c.style.height = cardHeight;
 }
+//function used by buildBoard and randomtheme button to change image of cards
 function setCardBackgroundImg(c) {
     c.style.backgroundImage = cardBackgroundImg
 }
