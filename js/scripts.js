@@ -1,67 +1,6 @@
-//Themes
-// spaceTheme = [
-//     {
-//         name: 'mercury',
-//         img: './assets/img/space/Mercury.jpeg'
-//     },
-//     {
-//         name: 'venus',
-//         img: './assets/img/space/Venus.jpeg'
-//     },
-//     {
-//         name: 'earth',
-//         img: './assets/img/space/Earth.jpeg'
-//     },
-//     {
-//         name: 'mars',
-//         img: './assets/img/space/Mars.jpeg'
-//     },
-//     {
-//         name: 'jupiter',
-//         img: './assets/img/space/Jupiter.jpeg'
-//     },
-//     {
-//         name: 'saturn',
-//         img: './assets/img/space/Saturn.jpeg'
-//     },
-//     {
-//         name: 'uranus',
-//         img: './assets/img/space/Uranus.jpeg'
-//     },
-//     {
-//         name: 'neptune',
-//         img: './assets/img/space/Neptune.jpeg'
-//     },
-//     {
-//         name: 'sun',
-//         img: './assets/img/space/Sun.jpeg'
-//     },
-//     {
-//         name: 'moon',
-//         img: './assets/img/space/moon.jpeg'
-//     },
-//     {
-//         name: 'alien',
-//         img: './assets/img/space/alien.jpeg'
-//     },
-//     {
-//         name: 'satellite',
-//         img: './assets/img/space/satellite.jpeg'
-//     },
-//     {
-//         name: 'astronaut',
-//         img: './assets/img/space/astronaut.jpeg'
-//     },
-//     {
-//         name: 'star',
-//         img: './assets/img/space/star.jpeg'
-//     },
-//     {
-//         name: 'telescope',
-//         img: './assets/img/space/telescope.jpeg'
-//     }
-// ]
+//game size - can be changed by using difficulty buttons
 let gameSize = 16;
+//used to store cards players choose when clicking
 let firstChoice = {
 	id: '',
 	color: 'white',
@@ -70,6 +9,8 @@ let secondChoice = {
 	id: '',
 	color: 'white',
 };
+//themes - first item in array is just a visual identifier, 2nd is page background
+//and 3rd is used for back of cards
 let themes = [
 	['space', `url('./assets/img/pgal.jpeg')`, `url('./assets/img/astro.jpg')`],
 	[
@@ -100,14 +41,19 @@ let themes = [
 		`url('./assets/img/neo.png')`,
 	],
 ];
-let randomTheme;
+//variable for random theme function
+let randomTheme
+let randomThemeOld
+//variable for check win condition function
 let winCon = 0;
 const board = document.getElementById('board');
 let cards;
+// default size for initial 16 card game load
 let dColumns = 'repeat(4, 150px)';
 let dRows = 'repeat(4, 150px)';
 let cardWidth = '140px';
 let cardHeight = '140px';
+//used for trackTime function - uses a set interval of 1000
 let trackedSeconds = '';
 //colors used for underside of cards
 const colorMaster = [
@@ -140,13 +86,13 @@ function setCardColorsForGame() {
 		}
 	}
 	cardsForGame = shuffle(cardColorsForGame);
-	console.log(cardsForGame);
 }
 
 const clickCounter = document.querySelector('#clickCounter');
 let clickCount;
 let busy = false;
 let cardsForGame = [];
+//starting timer when page loads
 let pageTimer = setInterval(function () {
 	trackTime();
 }, 1000);
@@ -171,7 +117,7 @@ function shuffle(array) {
 //function buidling board:
 //dynamically builds board based on number of cards chosen
 //sets up colors/backgrounds for cards/page, assigns click listeners, and starts timer
-//
+//initiates on page load and is called by boardReset and difficulty buttons
 buildBoard();
 function buildBoard() {
 	clearCurrentCards();
@@ -195,8 +141,9 @@ function buildBoard() {
 	setCardListeners();
 	resetBoard();
 	clickCount = 0;
-	clickCounter.innerHTML = 'Click Counter: 0';
+	clickCounter.innerHTML = 'Turn Counter: 0';
 }
+
 //clears all cards - called by buildBoard function
 //https://css-tricks.com/snippets/javascript/remove-element/
 function clearCurrentCards() {
@@ -216,7 +163,6 @@ function setCardListeners() {
 				setCardCondition(this);
 				checkCards();
 			}
-			console.log(trackedSeconds);
 		});
 	}
 }
@@ -227,7 +173,7 @@ resetButton.addEventListener('click', function reset() {
 	buildBoard();
 });
 
-//reset board back to defaults - called by buildboard
+//reset card back to defaults - called by buildboard
 function resetBoard() {
 	for (i = 0; i < cards.length; i++) {
 		cards[i].style.backgroundColor = 'white';
@@ -282,9 +228,9 @@ function checkWin() {
 		clearInterval(pageTimer);
 		setTimeout(() => {
 			alert(
-				`You found all ${
-					gameSize / 2
-				} matches in ${clickCount} clicks and ${min} minutes ${sec} seconds!`
+				`You found all ${gameSize / 2} matches in ${parseInt(
+					clickCount / 2
+				)} turns and ${min} minutes ${sec} seconds!`
 			);
 		}, 10);
 	} else {
@@ -341,13 +287,16 @@ buttonD4.addEventListener('click', function d4() {
 	buildBoard();
 });
 //Button used to select random theme. decided not to add buildBoard call here
-//this allows user to change theme mid game and still continue without a reset
+//this allows user to change theme mid game and still continue without losing progress
 //theme changes background of page and back of cards using matching image files pulled from
 //themes array
 const themeButoon = document.querySelector('#themeButton');
 themeButton.addEventListener('click', function ranTheme() {
-	randomTheme = Math.floor(Math.random() * themes.length);
-	console.log(randomTheme);
+    busy = true
+	randomThemeOld = randomTheme;
+	while (randomThemeOld === randomTheme) {
+		randomTheme = Math.floor(Math.random() * themes.length);
+	}
 	bodyBackgroundImg = themes[randomTheme][1];
 	cardBackgroundImg = themes[randomTheme][2];
 	document.querySelector('body').style.backgroundImage = bodyBackgroundImg;
@@ -356,6 +305,7 @@ themeButton.addEventListener('click', function ranTheme() {
 			setCardBackgroundImg(cards[i]);
 		}
 	}
+    busy=false
 });
 //used to set size of cards for various
 function setSize(c) {
@@ -366,9 +316,10 @@ function setSize(c) {
 function setCardBackgroundImg(c) {
 	c.style.backgroundImage = cardBackgroundImg;
 }
+//tracks click count - called by listener on click
 function trackClickCount() {
 	clickCount++;
-	clickCounter.innerText = `Click Counter: ${clickCount}`;
+	clickCounter.innerText = `Turn Counter: ${parseInt(clickCount / 2)}`;
 }
 
 //https://www.codegrepper.com/code-examples/html/html+timer
@@ -394,5 +345,3 @@ function resetTimer() {
 		trackTime();
 	}, 1000);
 }
-
-console.log(themes);
