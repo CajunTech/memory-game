@@ -44,6 +44,8 @@ body {
 	justify-content: space-around;
 	flex-direction: row;
 	margin: 1px auto;
+	
+	
 }
 .difficultySelect > button {
 	width: 80px;
