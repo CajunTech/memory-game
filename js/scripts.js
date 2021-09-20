@@ -1,3 +1,66 @@
+//Themes
+// spaceTheme = [
+//     {
+//         name: 'mercury',
+//         img: './assets/img/space/Mercury.jpeg'
+//     },
+//     {
+//         name: 'venus',
+//         img: './assets/img/space/Venus.jpeg'
+//     },
+//     {
+//         name: 'earth',
+//         img: './assets/img/space/Earth.jpeg'
+//     },
+//     {
+//         name: 'mars',
+//         img: './assets/img/space/Mars.jpeg'
+//     },
+//     {
+//         name: 'jupiter',
+//         img: './assets/img/space/Jupiter.jpeg'
+//     },
+//     {
+//         name: 'saturn',
+//         img: './assets/img/space/Saturn.jpeg'
+//     },
+//     {
+//         name: 'uranus',
+//         img: './assets/img/space/Uranus.jpeg'
+//     },
+//     {
+//         name: 'neptune',
+//         img: './assets/img/space/Neptune.jpeg'
+//     },
+//     {
+//         name: 'sun',
+//         img: './assets/img/space/Sun.jpeg'
+//     },
+//     {
+//         name: 'moon',
+//         img: './assets/img/space/moon.jpeg'
+//     },
+//     {
+//         name: 'alien',
+//         img: './assets/img/space/alien.jpeg'
+//     },
+//     {
+//         name: 'satellite',
+//         img: './assets/img/space/satellite.jpeg'
+//     },
+//     {
+//         name: 'astronaut',
+//         img: './assets/img/space/astronaut.jpeg'
+//     },
+//     {
+//         name: 'star',
+//         img: './assets/img/space/star.jpeg'
+//     },
+//     {
+//         name: 'telescope',
+//         img: './assets/img/space/telescope.jpeg'
+//     }
+// ]
 let gameSize = 16;
 let firstChoice = {
 	id: '',
@@ -13,11 +76,6 @@ let themes = [
 		'horror1',
 		`url('./assets/img/jigsaw.jpg')`,
 		`url('./assets/img/jigsawww.jpeg')`,
-	],
-	[
-		'windows1',
-		`url('./assets/img/bsodWin8.jpeg')`,
-		`url('./assets/img/winHG.jpeg')`,
 	],
 	['eve1', `url('./assets/img/eve1.jpeg')`, `url('./assets/img/eveicon.png')`],
 	[
@@ -35,6 +93,11 @@ let themes = [
 		'sw2',
 		`url('./assets/img/swzoombg.jpeg')`,
 		`url('./assets/img/bb8icon.png')`,
+	],
+	[
+		'matrix1',
+		`url('./assets/img/matrix1bg.jpeg')`,
+		`url('./assets/img/neo.png')`,
 	],
 ];
 let randomTheme;
@@ -333,4 +396,3 @@ function resetTimer() {
 }
 
 console.log(themes);
-
