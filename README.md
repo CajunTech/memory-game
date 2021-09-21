@@ -3,6 +3,8 @@
 
 !['image of game'](https://i.imgur.com/eHRviFs.png)
 
+Link to application - https://eager-northcutt-8458dc.netlify.app/
+</br>
 
 
 Technology used:</br>
@@ -154,14 +156,25 @@ themeButton.addEventListener('click', function ranTheme() {
 </br>
 
 
-Assets Used:
-</br>
--
--
--
--
--
--
--
+# Assets Used:
 
-Link to application - https://eager-northcutt-8458dc.netlify.app/
+Eve Online Theme:
+- https://images5.alphacoders.com/105/1052978.jpg
+- https://brandeps.com/logo/E/EVE-Online-01
+
+Saw Theme:
+- https://wallpapercave.com/w/wp3250609
+- https://staticr1.blastingcdn.com/media/photogallery/2017/7/11/660x290/b_1200x680/jigsaw-is-set-to-return-to-unleash-terror-once-again-photo-via-youtube-screenshot_1436825.jpg
+
+Star Wars Themes:
+- http://laptop.hdimagesandwallpaper.com/wp-content/uploads/2020/10/Star-Wars-Laptop-Background.jpg
+- https://storage.googleapis.com/spikeybits-staging-bucket/2021/03/fcfb56f3-yoda-fight.jpg
+- https://www.micechat.com/wp-content/uploads/2020/01/1117ZR_0792MS.jpg
+- https://static.wikia.nocookie.net/star-wars-canon/images/5/51/Star-wars-bb-8-remote-controlled-robot-white_sku-header.png
+
+Matrix Theme:
+- https://blog.zoombackground.io/media/posts/4/82abdc6c0818f80ada086fb1b912a62e.jpg
+- https://tecavis.fr/wp-content/uploads/2021/09/23888/le-site-web-matrix-4-recree-un-classique-culte-original-450x300.jpg
+
+
+
