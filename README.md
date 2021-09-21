@@ -7,14 +7,12 @@ Link to application - https://eager-northcutt-8458dc.netlify.app/
 </br>
 
 
-Technology used:</br>
+# Technology used:</br>
 Vanilla html, css, and javascript
-
-
 </br>
-Approach:</br>
+
+# Approach:
 I started out with basic idea of a grid card format with a few option buttons for changing the amount of cards. I use an array of colors and pull/shuffle the appropriate number for each game. I use a default background color as an easy way to differentiate cards a player has chosen. After building base functionality and designing CSS layout I began adding additional enhancements such as a turn counter, timer, and random themes. 
-</br>
 </br>
 
 The following function pushes the number of colors (j for loop pushes 2 of each for matching) specified by the gamesize variable from colorMaster, an array of 15 colors, to cardColorsForGame. The gamesize variable is controlled by difficulty buttons seen at top of image above. Once the correct number of cards are pushed the array is shuffled using a Fisher-Yates shuffle function into the cardsForGame array.
@@ -29,10 +27,7 @@ function setCardColorsForGame() {
 	cardsForGame = shuffle(cardColorsForGame);
 }
 ```
-</br>
-cards are created and removed using the following 2 blocks of code with the first being part of the primary function used on page load, page reset, or difficulty changes
-</br>
-
+Cards are created and removed using the following 2 blocks of code with the first being part of the primary function used on page load, page reset, or difficulty changes
 ``` javacript
 	for (i = 0; i < gameSize; i++) {
 		document
@@ -51,8 +46,7 @@ function clearCurrentCards() {
 	}
 }
 ```
-</br>
-card listeners added with 2 checks for activation and other functions called on click. There are 2 checks that must be passed before event listener will allow activation: backgroundColor of card must be white (used to signify "back of card") - prevents players from clicking on cards already flipped as background colors are changed and a busy boolean that must be false. The busy variable is set to true/false by various functions. This prevents players from clicking during the delay where "flipped colors are shown before being flipped back to white.
+Card listeners added with 2 checks for activation and other functions called on click. There are 2 checks that must be passed before event listener will allow activation: backgroundColor of card must be white (used to signify "back of card") - prevents players from clicking on cards already flipped as background colors are changed and a busy boolean that must be false. The busy variable is set to true/false by various functions. This prevents players from clicking during the delay where "flipped colors are shown before being flipped back to white.
 
 ``` javascript
 function setCardListeners() {
@@ -104,7 +98,7 @@ function checkCards() {
 	}
 }
 ```
-An example of one of the 4 difficulty buttons and it's settings. Each button sets a different card size and amount of cards per row/column while keeping the same width of grid area.
+Example of one of the four difficulty buttons and their settings. Each button sets a different card size and amount of cards per row/column while keeping the same width of grid area.
 ``` javascript
 const buttonD4 = document.querySelector('#buttonD4');
 buttonD4.addEventListener('click', function d4() {
@@ -116,7 +110,6 @@ buttonD4.addEventListener('click', function d4() {
 	buildBoard();
 });
 ```
-
 Button used to select random theme and change settings. Avoids overwriting already flipped matches to allow player to continue with current game.
 ``` javascript
 const themeButoon = document.querySelector('#themeButton');
@@ -146,13 +139,15 @@ themeButton.addEventListener('click', function ranTheme() {
 - Game timer
 </br>
 
+# Known issues:
+- Buttons load as transparent on iOS (Safari and Chrome)
+</br>
 
 
 # What's left:
 - Allow players to select themes in addition to choosing random ones.
 - Change for just colors when flipped to pictures.
 - Transition to a more education based game using themes with pictures of fruits, vegetables, animals, planets, etc.
-
 </br>
 
 
