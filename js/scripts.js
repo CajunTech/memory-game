@@ -12,23 +12,12 @@ let secondChoice = {
 //themes - first item in array is just a visual identifier, 2nd is page background
 //and 3rd is used for back of cards
 let themes = [
-	['space', `url('./assets/img/pgal.jpeg')`, `url('./assets/img/astro.jpg')`],
 	[
 		'horror1',
 		`url('./assets/img/jigsaw.jpg')`,
 		`url('./assets/img/jigsawww.jpeg')`,
 	],
 	['eve1', `url('./assets/img/eve1.jpeg')`, `url('./assets/img/eveicon.png')`],
-	[
-		'xmas1',
-		`url('./assets/img/xmas2bg.jpg')`,
-		`url('./assets/img/merryxmasicon.jpeg')`,
-	],
-	[
-		'xmas2',
-		`url('./assets/img/xmas1bg.jpg')`,
-		`url('./assets/img/xmasmt.jpeg')`,
-	],
 	['sw1', `url('./assets/img/sw1bg.jpeg')`, `url('./assets/img/yoda1.jpeg')`],
 	[
 		'sw2',
@@ -38,7 +27,7 @@ let themes = [
 	[
 		'matrix1',
 		`url('./assets/img/matrix1bg.jpeg')`,
-		`url('./assets/img/neo.png')`,
+		`url('./assets/img/redblue.jpeg')`,
 	],
 ];
 //variable for random theme function
