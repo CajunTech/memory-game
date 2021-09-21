@@ -148,6 +148,7 @@ themeButton.addEventListener('click', function ranTheme() {
 - Allow players to select themes in addition to choosing random ones.
 - Change for just colors when flipped to pictures.
 - Transition to a more education based game using themes with pictures of fruits, vegetables, animals, planets, etc.
+- Assess viability of mobile or mobile only version (different sizing, restricted card amounts, etc.)
 </br>
 
 
