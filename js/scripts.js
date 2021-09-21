@@ -31,12 +31,10 @@ let themes = [
 	],
 ];
 //variables for random theme function
-let randomTheme;
-let randomThemeOld;
+let randomTheme, randomThemeOld;
 //variable for check win condition function
 let winCon = 0;
 const board = document.getElementById('board');
-let cards;
 // default size for initial 16 card game load
 //difficultyColumns and difficultyRows are short for difficultyRows
 let difficultyColumns = 'repeat(4, 150px)';
@@ -63,9 +61,8 @@ const colorMaster = [
 	'burlywood',
 	'lightseagreen',
 ];
-let cardBackgroundImg;
-let bodyBackgroundImg;
-let cardColorsForGame;
+let cardBackgroundImg, bodyBackgroundImg;
+let cards, cardColorsForGame;
 const clickCounter = document.querySelector('#clickCounter');
 let clickCount;
 let busy = false;
