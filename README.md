@@ -172,5 +172,13 @@ Matrix Theme:
 - https://blog.zoombackground.io/media/posts/4/82abdc6c0818f80ada086fb1b912a62e.jpg
 - https://tecavis.fr/wp-content/uploads/2021/09/23888/le-site-web-matrix-4-recree-un-classique-culte-original-450x300.jpg
 
+</br>
+</br>
+</br>
+<font size="1">
+This website may contain copyrighted material, the use of which may not have been specifically authorized by the copyright owner. The material contained in this website is distributed without profit for research and educational purposes.
+This should constitute a ‘fair use’ of any such copyrighted material (referenced and provided for in section 107 of the US Copyright Law).
+If you wish to use any copyrighted material from this site for purposes of your own that go beyond ‘fair use’, you must obtain expressed permission from the copyright owner.
+</font>
 
 
