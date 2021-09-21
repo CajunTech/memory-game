@@ -103,8 +103,8 @@ Example of one of the four difficulty buttons and their settings. Each button se
 const buttonD4 = document.querySelector('#buttonD4');
 buttonD4.addEventListener('click', function d4() {
 	gameSize = 30;
-	dColumns = 'repeat(6, 100px)';
-	dRows = 'repeat(5, 120px)';
+	difficultyColumns = 'repeat(6, 100px)';
+	difficultyRows = 'repeat(5, 120px)';
 	cardWidth = '90px';
 	cardHeight = '90px';
 	buildBoard();
